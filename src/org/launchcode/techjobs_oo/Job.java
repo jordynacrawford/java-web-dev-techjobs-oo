@@ -92,4 +92,34 @@ public class Job {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        String[] availableData = new String[5];
+        String[] fields = new String[5];
+        fields[0] = this.name;
+        fields[1] = this.employer.toString();
+        fields[2] = this.location.toString();
+        fields[3] = this.positionType.toString();
+        fields[4] = this.coreCompetency.toString();
+
+        for (int i = 0; i < 5; i++) {
+           if (fields[i].equals("")) {
+               availableData[i] = "Data not available";
+           } else {
+               availableData[i] = fields[i];
+           }
+        }
+
+        if (availableData.toString().equals("")) {
+            return "OOPS! This job does not seem to exist.";
+        } else {
+            return "\nID: " + this.id +
+                    "\nName: " + availableData[0] +
+                    "\nEmployer: " + availableData[1] +
+                    "\nLocation: " + availableData[2] +
+                    "\nPosition Type: " + availableData[3] +
+                    "\nCore Competency: " + availableData[4] + "\n";
+        }
+    }
 }
