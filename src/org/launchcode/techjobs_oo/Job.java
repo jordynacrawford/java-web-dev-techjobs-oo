@@ -1,5 +1,8 @@
 package org.launchcode.techjobs_oo;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Job {
@@ -95,31 +98,29 @@ public class Job {
 
     @Override
     public String toString() {
-        String[] availableData = new String[5];
-        String[] fields = new String[5];
-        fields[0] = this.name;
-        fields[1] = this.employer.toString();
-        fields[2] = this.location.toString();
-        fields[3] = this.positionType.toString();
-        fields[4] = this.coreCompetency.toString();
 
-        for (int i = 0; i < 5; i++) {
-           if (fields[i].equals("")) {
-               availableData[i] = "Data not available";
-           } else {
-               availableData[i] = fields[i];
-           }
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add(this.name);
+        fields.add(this.employer.getValue());
+        fields.add(this.location.getValue());
+        fields.add(this.positionType.getValue());
+        fields.add(this.coreCompetency.getValue());
+
+        for (String field : fields) {
+            if (field.equals("")) {
+                fields.set(fields.indexOf(field), "Data not available");
+            }
         }
 
-        if (availableData.toString().equals("")) {
+        if (fields.toString().equals("")) {
             return "OOPS! This job does not seem to exist.";
         } else {
             return "\nID: " + this.id +
-                    "\nName: " + availableData[0] +
-                    "\nEmployer: " + availableData[1] +
-                    "\nLocation: " + availableData[2] +
-                    "\nPosition Type: " + availableData[3] +
-                    "\nCore Competency: " + availableData[4] + "\n";
+                    "\nName: " + fields.get(0) +
+                    "\nEmployer: " + fields.get(1) +
+                    "\nLocation: " + fields.get(2) +
+                    "\nPosition Type: " + fields.get(3) +
+                    "\nCore Competency: " + fields.get(4) + "\n";
         }
     }
 }
